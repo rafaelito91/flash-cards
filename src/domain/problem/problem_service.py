@@ -1,4 +1,4 @@
-from src.domain.problem.problem_inquirer import obtain_problem_input_data
+from src.domain.problem.problem_inquirer import obtain_problem_input_data, ask_wish_continue
 from src.domain.problem.problem_repository import save, get_problems, update_problems, get_sorted_problems
 from datetime import datetime
 from src.domain.problem.problem_types import ProblemType
@@ -47,17 +47,22 @@ def execute_problems():
         return
 
     print('\n### Training Session Starting ###\n')
+    answered_count = 0
     for index, problem in enumerate(problems):
         position = index + 1
         print('Problem: ' + str(position) + '/' + str(len(problems)))
         print('Description: ' + problem['description'])
         print('Summary:' + problem['summary'])
-        answer = input('Continue? (y/n)\n')
-        is_positive = answer.lower() == 'y'
-        if not is_positive:
-            print('\n### Finishing up training session ###\n')
+        wish_continue = ask_wish_continue()
+        if not wish_continue:
             break
+        answered_count += 1
 
-    print('\n### Training Session Completed!! ###\n')
+    if answered_count == len(problems):
+        print('\n### Training Session Completed!! ###\n')
+    else:
+        print('\n### TRAINING SESSION INTERRUPTED ###\n')
+        remaining_questions = len(problems) - answered_count
+        print(str(remaining_questions) + ' questions remaining')
 
 

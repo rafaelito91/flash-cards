@@ -18,3 +18,8 @@ def obtain_problem_input_data():
         "categories": get_categories()
     }
     return problem
+
+
+def ask_wish_continue():
+    answer = input('Continue? (y/n)\n')
+    return answer.lower() == 'y'
