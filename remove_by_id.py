@@ -1,4 +1,4 @@
-from src.problem.problem_service import remove_by_id
+from src.domain.problem.problem_service import remove_by_id
 
 
 def main():

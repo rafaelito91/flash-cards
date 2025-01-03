@@ -1,5 +1,5 @@
 from datetime import datetime
-from src.problem.problem_types import ProblemType
+from src.domain.problem.problem_types import ProblemType
 
 
 def get_categories():

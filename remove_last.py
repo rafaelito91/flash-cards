@@ -1,4 +1,4 @@
-from src.problem.problem_service import remove_last
+from src.domain.problem.problem_service import remove_last
 
 
 def main():

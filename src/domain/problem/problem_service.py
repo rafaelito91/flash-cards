@@ -1,7 +1,7 @@
-from src.problem.problem_inquirer import obtain_problem_input_data
-from src.problem.problem_repository import save, get_problems, update_problems, get_sorted_problems
+from src.domain.problem.problem_inquirer import obtain_problem_input_data
+from src.domain.problem.problem_repository import save, get_problems, update_problems, get_sorted_problems
 from datetime import datetime
-from src.problem.problem_types import ProblemType
+from src.domain.problem.problem_types import ProblemType
 
 
 def save_problem():

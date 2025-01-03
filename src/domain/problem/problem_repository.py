@@ -1,5 +1,5 @@
 from src.client.data import get_data, save_data
-from src.problem.problem_validator import validate_problem
+from src.domain.problem.problem_validator import validate_problem
 import uuid
 from datetime import datetime
 
