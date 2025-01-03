@@ -20,6 +20,20 @@ def obtain_problem_input_data():
     return problem
 
 
-def ask_wish_continue():
-    answer = input('Continue? (y/n)\n')
-    return answer.lower() == 'y'
+def ask_action():
+    options = {
+        'p': ['Consider positive', 'positive'],
+        'f': ['Consider failure', 'failure'],
+        's': ['Skip', 'skip'],
+        'b': ['Break execution', 'break']
+    }
+    print('What is your action?')
+    for option in options:
+        print(f"- ({option}) {options[option][0]}")
+    answer = input('Answer:')
+
+    if answer.lower() not in options:
+        print(f"Invalid option provided ({answer.lower()}). Repeating question\n")
+        return 'repeat'
+
+    return options[answer][1]

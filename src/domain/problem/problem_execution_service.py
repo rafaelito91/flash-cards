@@ -1,11 +1,20 @@
-from src.domain.problem.problem_inquirer import ask_wish_continue
+from src.domain.problem.problem_inquirer import ask_action
 from src.domain.problem.problem_repository import get_sorted_problems
 
 
-def describe_problem(position, problem, problems):
+def _describe_problem(position, problem, problems):
     print('Problem: ' + str(position) + '/' + str(len(problems)))
     print('Description: ' + problem['description'])
     print('Summary:' + problem['summary'])
+
+
+def _conclusion_message(answered_count, problems):
+    if answered_count == len(problems):
+        print('\n### Training Session Completed!! ###\n')
+    else:
+        print('\n### TRAINING SESSION INCOMPLETE DUE TO BREAKS OR SKIPS ###\n')
+        remaining_questions = len(problems) - answered_count
+        print(str(remaining_questions) + ' questions remaining')
 
 
 def execute_problems():
@@ -16,18 +25,26 @@ def execute_problems():
 
     print('\n### Training Session Starting ###\n')
     answered_count = 0
-    for index, problem in enumerate(problems):
+    index = 0
+    while index < len(problems):
+        problem = problems[index]
         position = index + 1
-        describe_problem(position, problem, problems)
+        _describe_problem(position, problem, problems)
 
-        wish_continue = ask_wish_continue()
-        if not wish_continue:
+        action = ask_action()
+        if action == 'positive':
+            answered_count += 1
+            index += 1
+        elif action == 'negative':
+            answered_count += 1
+            index += 1
+        elif action == 'repeat':
+            pass
+        elif action == 'skip':
+            index += 1
+        elif action == 'break':
             break
-        answered_count += 1
+        else:
+            raise Exception(f"Problem mapping desired action: {action}")
 
-    if answered_count == len(problems):
-        print('\n### Training Session Completed!! ###\n')
-    else:
-        print('\n### TRAINING SESSION INTERRUPTED ###\n')
-        remaining_questions = len(problems) - answered_count
-        print(str(remaining_questions) + ' questions remaining')
+    _conclusion_message(answered_count, problems)
