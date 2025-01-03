@@ -15,7 +15,7 @@ def save_problem_example():
         "description": "Example problem",
         "summary": "basically you need to know how to check duplicates in a the data structure XPTO",
         "created_at": datetime.utcnow().isoformat(),
-        "categories": [category.value]
+        "categories": [category.value[0]]
     }
     save(problem)
 
@@ -38,3 +38,26 @@ def remove_by_id():
     index = next((i for i, p in enumerate(problems) if p["id"] == id), None)
     problems.pop(index)
     update_problems(problems)
+
+
+def execute_problems():
+    problems = get_sorted_problems()
+    if not problems:
+        print('Empty problem list!')
+        return
+
+    print('\n### Training Session Starting ###\n')
+    for index, problem in enumerate(problems):
+        position = index + 1
+        print('Problem: ' + str(position) + '/' + str(len(problems)))
+        print('Description: ' + problem['description'])
+        print('Summary:' + problem['summary'])
+        answer = input('Continue? (y/n)\n')
+        is_positive = answer.lower() == 'y'
+        if not is_positive:
+            print('\n### Finishing up training session ###\n')
+            break
+
+    print('\n### Training Session Completed!! ###\n')
+
+
