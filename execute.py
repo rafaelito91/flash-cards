@@ -1,4 +1,4 @@
-from src.domain.problem.problem_service import execute_problems
+from src.domain.problem.problem_execution_service import execute_problems
 
 
 def main():
